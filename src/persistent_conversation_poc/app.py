@@ -1,7 +1,7 @@
 import asyncio
 import os
 from operator import itemgetter
-
+import hashlib
 import streamlit as st
 from google.cloud import discoveryengine, storage
 from langchain.chains import ConversationalRetrievalChain
@@ -159,18 +159,22 @@ def upload_files(
     data_store_id: str,
     user_id: str,
     session_id: str,
+    bucket_uri: str,
     uploaded_files: list[UploadedFile],
+    storage_client: storage.Client,
+    search_client: discoveryengine.DocumentServiceClient,
 ):
     uris = [
         f"{bucket_uri}/{session_id}/{uploaded_file.name}"
         for uploaded_file in uploaded_files
     ]
+    ids = [hashlib.md5(uri.encode("utf-8")).hexdigest() for uri in uris]
     for i, uploaded_file in enumerate(uploaded_files):
         blob = storage.Blob.from_string(uris[i], storage_client)
         blob.upload_from_file(uploaded_file)
     documents = [
         discoveryengine.Document(
-            id=uploaded_file.file_id,
+            id=ids[i],
             struct_data={
                 "user_id": user_id,
                 "session_id": session_id,
@@ -197,8 +201,11 @@ def upload_files(
 def run(
     project: str,
     location: str,
+    bucket_uri: str,
     search_location: str,
     search_data_store: str,
+    storage_client: storage.Client,
+    search_client: discoveryengine.DocumentServiceClient,
 ):
     st.set_page_config(page_title="Persistent Conversation PoC", page_icon="🐬")
 
@@ -216,7 +223,10 @@ def run(
             ),
             user_id=user_id,
             session_id=session_id,
+            bucket_uri=bucket_uri,
             uploaded_files=uploaded_files,
+            storage_client=storage_client,
+            search_client=search_client,
         )
 
     msgs = get_session_history(user_id=user_id, session_id=session_id)
@@ -262,6 +272,9 @@ if __name__ == "__main__":
     run(
         project=project,
         location=location,
+        bucket_uri=bucket_uri,
         search_location=search_location,
         search_data_store=data_store_id,
+        storage_client=storage_client,
+        search_client=search_client,
     )
