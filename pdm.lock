@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:da7ab6ccf8c2a28a987f9b72f4c9df54c07cc2a4c3670e7ad9c4b8a3d934b852"
+content_hash = "sha256:f2444ef8d67ecf4546eca5a0f80197b3bb17cb96d46ebb271b35565bdf8f07e7"
 
 [[package]]
 name = "aiohttp"
@@ -529,7 +529,6 @@ extras = ["grpc"]
 requires_python = ">=3.7"
 summary = "Google API client core library"
 groups = ["default"]
-marker = "platform_python_implementation != \"PyPy\""
 dependencies = [
     "google-api-core==2.17.1",
     "grpcio-status<2.0.dev0,>=1.33.2",
@@ -591,6 +590,47 @@ files = [
 ]
 
 [[package]]
+name = "google-cloud-aiplatform"
+version = "1.42.1"
+requires_python = ">=3.8"
+summary = "Vertex AI API client library"
+groups = ["default"]
+dependencies = [
+    "google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,<3.0.0dev,>=1.34.1",
+    "google-auth<3.0.0dev,>=2.14.1",
+    "google-cloud-bigquery<4.0.0dev,>=1.15.0",
+    "google-cloud-resource-manager<3.0.0dev,>=1.3.3",
+    "google-cloud-storage<3.0.0dev,>=1.32.0",
+    "packaging>=14.3",
+    "proto-plus<2.0.0dev,>=1.22.0",
+    "protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5",
+    "shapely<3.0.0dev",
+]
+files = [
+    {file = "google-cloud-aiplatform-1.42.1.tar.gz", hash = "sha256:679068e068e29059d673a6410483fea762286fa07739d684fb1b4626698e0805"},
+    {file = "google_cloud_aiplatform-1.42.1-py2.py3-none-any.whl", hash = "sha256:9f25ebd306807972cf05a578abc16695c4f72d4a2dd7e7b1624dbe247937ba24"},
+]
+
+[[package]]
+name = "google-cloud-bigquery"
+version = "3.17.2"
+requires_python = ">=3.7"
+summary = "Google BigQuery API client library"
+groups = ["default"]
+dependencies = [
+    "google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0dev,>=1.31.5",
+    "google-cloud-core<3.0.0dev,>=1.6.0",
+    "google-resumable-media<3.0dev,>=0.6.0",
+    "packaging>=20.0.0",
+    "python-dateutil<3.0dev,>=2.7.2",
+    "requests<3.0.0dev,>=2.21.0",
+]
+files = [
+    {file = "google-cloud-bigquery-3.17.2.tar.gz", hash = "sha256:6e1cf669a40e567ab3289c7b5f2056363da9fcb85d9a4736ee90240d4a7d84ea"},
+    {file = "google_cloud_bigquery-3.17.2-py2.py3-none-any.whl", hash = "sha256:cdadf5283dca55a1a350bacf8c8a7466169d3cf46c5a0a3abc5e9aa0b0a51dee"},
+]
+
+[[package]]
 name = "google-cloud-core"
 version = "2.4.1"
 requires_python = ">=3.7"
@@ -603,6 +643,23 @@ dependencies = [
 files = [
     {file = "google-cloud-core-2.4.1.tar.gz", hash = "sha256:9b7749272a812bde58fff28868d0c5e2f585b82f37e09a1f6ed2d4d10f134073"},
     {file = "google_cloud_core-2.4.1-py2.py3-none-any.whl", hash = "sha256:a9e6a4422b9ac5c29f79a0ede9485473338e2ce78d91f2370c01e730eab22e61"},
+]
+
+[[package]]
+name = "google-cloud-discoveryengine"
+version = "0.11.7"
+requires_python = ">=3.7"
+summary = "Google Cloud Discoveryengine API client library"
+groups = ["default"]
+dependencies = [
+    "google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.0",
+    "google-auth<3.0.0dev,>=2.14.1",
+    "proto-plus<2.0.0dev,>=1.22.3",
+    "protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5",
+]
+files = [
+    {file = "google-cloud-discoveryengine-0.11.7.tar.gz", hash = "sha256:8a8505b799157414b3a101242d3ab1dc47f4836afdc54c8bfcac18c1dded9de9"},
+    {file = "google_cloud_discoveryengine-0.11.7-py3-none-any.whl", hash = "sha256:cf59e533e4d642b6c0f7cfc64735f397c337286546e29df2194d62d6aa233f05"},
 ]
 
 [[package]]
@@ -622,6 +679,24 @@ dependencies = [
 files = [
     {file = "google-cloud-firestore-2.15.0.tar.gz", hash = "sha256:589ce49c6b8d7315a248327e4a124a44143f5a5314ea768f7c851660c21e6321"},
     {file = "google_cloud_firestore-2.15.0-py2.py3-none-any.whl", hash = "sha256:71b1b32c11e7cb2fa804037865619930655409a49238807a88c244510e5d21c7"},
+]
+
+[[package]]
+name = "google-cloud-resource-manager"
+version = "1.12.1"
+requires_python = ">=3.7"
+summary = "Google Cloud Resource Manager API client library"
+groups = ["default"]
+dependencies = [
+    "google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.0",
+    "google-auth<3.0.0dev,>=2.14.1",
+    "grpc-google-iam-v1<1.0.0dev,>=0.12.4",
+    "proto-plus<2.0.0dev,>=1.22.3",
+    "protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5",
+]
+files = [
+    {file = "google-cloud-resource-manager-1.12.1.tar.gz", hash = "sha256:25b3112c984ef6a2569ca7047160b2341c528c70e1d2e72deb99686aa2e167dd"},
+    {file = "google_cloud_resource_manager-1.12.1-py2.py3-none-any.whl", hash = "sha256:6a0b97886998fb076a71a7e9679a1187f6bed97519e0dff13352e7946513d458"},
 ]
 
 [[package]]
@@ -717,6 +792,22 @@ files = [
 ]
 
 [[package]]
+name = "googleapis-common-protos"
+version = "1.62.0"
+extras = ["grpc"]
+requires_python = ">=3.7"
+summary = "Common protobufs used in Google APIs"
+groups = ["default"]
+dependencies = [
+    "googleapis-common-protos==1.62.0",
+    "grpcio<2.0.0.dev0,>=1.44.0",
+]
+files = [
+    {file = "googleapis-common-protos-1.62.0.tar.gz", hash = "sha256:83f0ece9f94e5672cced82f592d2a5edf527a96ed1794f0bab36d5735c996277"},
+    {file = "googleapis_common_protos-1.62.0-py2.py3-none-any.whl", hash = "sha256:4750113612205514f9f6aa4cb00d523a94f3e8c06c5ad2fee466387dc4875f07"},
+]
+
+[[package]]
 name = "greenlet"
 version = "3.0.3"
 requires_python = ">=3.7"
@@ -755,12 +846,27 @@ files = [
 ]
 
 [[package]]
+name = "grpc-google-iam-v1"
+version = "0.13.0"
+requires_python = ">=3.7"
+summary = "IAM API client library"
+groups = ["default"]
+dependencies = [
+    "googleapis-common-protos[grpc]<2.0.0dev,>=1.56.0",
+    "grpcio<2.0.0dev,>=1.44.0",
+    "protobuf!=3.20.0,!=3.20.1,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<5.0.0dev,>=3.19.5",
+]
+files = [
+    {file = "grpc-google-iam-v1-0.13.0.tar.gz", hash = "sha256:fad318608b9e093258fbf12529180f400d1c44453698a33509cc6ecf005b294e"},
+    {file = "grpc_google_iam_v1-0.13.0-py2.py3-none-any.whl", hash = "sha256:53902e2af7de8df8c1bd91373d9be55b0743ec267a7428ea638db3775becae89"},
+]
+
+[[package]]
 name = "grpcio"
 version = "1.60.1"
 requires_python = ">=3.7"
 summary = "HTTP/2-based RPC framework"
 groups = ["default"]
-marker = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "grpcio-1.60.1-cp310-cp310-linux_armv7l.whl", hash = "sha256:14e8f2c84c0832773fb3958240c69def72357bc11392571f87b2d7b91e0bb092"},
     {file = "grpcio-1.60.1-cp310-cp310-macosx_12_0_universal2.whl", hash = "sha256:33aed0a431f5befeffd9d346b0fa44b2c01aa4aeae5ea5b2c03d3e25e0071216"},
@@ -798,7 +904,6 @@ version = "1.60.1"
 requires_python = ">=3.6"
 summary = "Status proto mapping for gRPC"
 groups = ["default"]
-marker = "platform_python_implementation != \"PyPy\""
 dependencies = [
     "googleapis-common-protos>=1.5.5",
     "grpcio>=1.60.1",
@@ -985,6 +1090,24 @@ dependencies = [
 files = [
     {file = "langchain_core-0.1.25-py3-none-any.whl", hash = "sha256:ff0a0ad1ed877878e7b9c7601870cd12145abf3c814aae41995968d05ea6c09d"},
     {file = "langchain_core-0.1.25.tar.gz", hash = "sha256:065ff8b4e383c5645d175b20ae44b258330ed06457b0fc0179efee310b6f2af6"},
+]
+
+[[package]]
+name = "langchain-google-vertexai"
+version = "0.0.5"
+requires_python = ">=3.8.1,<4.0"
+summary = "An integration package connecting GoogleVertexAI and LangChain"
+groups = ["default"]
+dependencies = [
+    "google-cloud-aiplatform<2.0.0,>=1.39.0",
+    "google-cloud-storage<3.0.0,>=2.14.0",
+    "langchain-core<0.2,>=0.1.7",
+    "types-protobuf<5.0.0.0,>=4.24.0.4",
+    "types-requests<3.0.0,>=2.31.0",
+]
+files = [
+    {file = "langchain_google_vertexai-0.0.5-py3-none-any.whl", hash = "sha256:7d20250a19262d8e7fc21ad63d891dde0b7b6362a117f182df428552289626fc"},
+    {file = "langchain_google_vertexai-0.0.5.tar.gz", hash = "sha256:40cd9d5238722af2ba3c072b489d2dc95b8d4a03267bd64a8edff49c2d2f82c2"},
 ]
 
 [[package]]
@@ -1340,7 +1463,6 @@ version = "1.23.0"
 requires_python = ">=3.6"
 summary = "Beautiful, Pythonic protocol buffers."
 groups = ["default"]
-marker = "platform_python_implementation != \"PyPy\""
 dependencies = [
     "protobuf<5.0.0dev,>=3.19.0",
 ]
@@ -1785,6 +1907,40 @@ files = [
 ]
 
 [[package]]
+name = "shapely"
+version = "2.0.3"
+requires_python = ">=3.7"
+summary = "Manipulation and analysis of geometric objects"
+groups = ["default"]
+dependencies = [
+    "numpy<2,>=1.14",
+]
+files = [
+    {file = "shapely-2.0.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:af7e9abe180b189431b0f490638281b43b84a33a960620e6b2e8d3e3458b61a1"},
+    {file = "shapely-2.0.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:98040462b36ced9671e266b95c326b97f41290d9d17504a1ee4dc313a7667b9c"},
+    {file = "shapely-2.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:71eb736ef2843f23473c6e37f6180f90f0a35d740ab284321548edf4e55d9a52"},
+    {file = "shapely-2.0.3-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:881eb9dbbb4a6419667e91fcb20313bfc1e67f53dbb392c6840ff04793571ed1"},
+    {file = "shapely-2.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f10d2ccf0554fc0e39fad5886c839e47e207f99fdf09547bc687a2330efda35b"},
+    {file = "shapely-2.0.3-cp310-cp310-win32.whl", hash = "sha256:6dfdc077a6fcaf74d3eab23a1ace5abc50c8bce56ac7747d25eab582c5a2990e"},
+    {file = "shapely-2.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:64c5013dacd2d81b3bb12672098a0b2795c1bf8190cfc2980e380f5ef9d9e4d9"},
+    {file = "shapely-2.0.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:56cee3e4e8159d6f2ce32e421445b8e23154fd02a0ac271d6a6c0b266a8e3cce"},
+    {file = "shapely-2.0.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:619232c8276fded09527d2a9fd91a7885ff95c0ff9ecd5e3cb1e34fbb676e2ae"},
+    {file = "shapely-2.0.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b2a7d256db6f5b4b407dc0c98dd1b2fcf1c9c5814af9416e5498d0a2e4307a4b"},
+    {file = "shapely-2.0.3-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e45f0c8cd4583647db3216d965d49363e6548c300c23fd7e57ce17a03f824034"},
+    {file = "shapely-2.0.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:13cb37d3826972a82748a450328fe02a931dcaed10e69a4d83cc20ba021bc85f"},
+    {file = "shapely-2.0.3-cp311-cp311-win32.whl", hash = "sha256:9302d7011e3e376d25acd30d2d9e70d315d93f03cc748784af19b00988fc30b1"},
+    {file = "shapely-2.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:6b464f2666b13902835f201f50e835f2f153f37741db88f68c7f3b932d3505fa"},
+    {file = "shapely-2.0.3-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:e86e7cb8e331a4850e0c2a8b2d66dc08d7a7b301b8d1d34a13060e3a5b4b3b55"},
+    {file = "shapely-2.0.3-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:c91981c99ade980fc49e41a544629751a0ccd769f39794ae913e53b07b2f78b9"},
+    {file = "shapely-2.0.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:bd45d456983dc60a42c4db437496d3f08a4201fbf662b69779f535eb969660af"},
+    {file = "shapely-2.0.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:882fb1ffc7577e88c1194f4f1757e277dc484ba096a3b94844319873d14b0f2d"},
+    {file = "shapely-2.0.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b9f2d93bff2ea52fa93245798cddb479766a18510ea9b93a4fb9755c79474889"},
+    {file = "shapely-2.0.3-cp312-cp312-win32.whl", hash = "sha256:99abad1fd1303b35d991703432c9481e3242b7b3a393c186cfb02373bf604004"},
+    {file = "shapely-2.0.3-cp312-cp312-win_amd64.whl", hash = "sha256:6f555fe3304a1f40398977789bc4fe3c28a11173196df9ece1e15c5bc75a48db"},
+    {file = "shapely-2.0.3.tar.gz", hash = "sha256:4d65d0aa7910af71efa72fd6447e02a8e5dd44da81a983de9d736d6e6ccbe674"},
+]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
@@ -1943,6 +2099,31 @@ files = [
     {file = "tornado-6.4-cp38-abi3-win32.whl", hash = "sha256:6f8a6c77900f5ae93d8b4ae1196472d0ccc2775cc1dfdc9e7727889145c45052"},
     {file = "tornado-6.4-cp38-abi3-win_amd64.whl", hash = "sha256:10aeaa8006333433da48dec9fe417877f8bcc21f48dda8d661ae79da357b2a63"},
     {file = "tornado-6.4.tar.gz", hash = "sha256:72291fa6e6bc84e626589f1c29d90a5a6d593ef5ae68052ee2ef000dfd273dee"},
+]
+
+[[package]]
+name = "types-protobuf"
+version = "4.24.0.20240129"
+requires_python = ">=3.8"
+summary = "Typing stubs for protobuf"
+groups = ["default"]
+files = [
+    {file = "types-protobuf-4.24.0.20240129.tar.gz", hash = "sha256:8a83dd3b9b76a33e08d8636c5daa212ace1396418ed91837635fcd564a624891"},
+    {file = "types_protobuf-4.24.0.20240129-py3-none-any.whl", hash = "sha256:23be68cc29f3f5213b5c5878ac0151706182874040e220cfb11336f9ee642ead"},
+]
+
+[[package]]
+name = "types-requests"
+version = "2.31.0.20240218"
+requires_python = ">=3.8"
+summary = "Typing stubs for requests"
+groups = ["default"]
+dependencies = [
+    "urllib3>=2",
+]
+files = [
+    {file = "types-requests-2.31.0.20240218.tar.gz", hash = "sha256:f1721dba8385958f504a5386240b92de4734e047a08a40751c1654d1ac3349c5"},
+    {file = "types_requests-2.31.0.20240218-py3-none-any.whl", hash = "sha256:a82807ec6ddce8f00fe0e949da6d6bc1fbf1715420218a9640d695f70a9e5a9b"},
 ]
 
 [[package]]
