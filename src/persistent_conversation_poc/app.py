@@ -155,7 +155,7 @@ def get_retriever(
     )
 
 
-def upload_files(
+def _import_documents(
     data_store_id: str,
     user_id: str,
     session_id: str,
@@ -165,10 +165,15 @@ def upload_files(
     search_client: discoveryengine.DocumentServiceClient,
 ):
     uris = [
-        f"{bucket_uri}/{session_id}/{uploaded_file.name}"
+        _generate_uploaded_file_uri(
+            bucket_uri=bucket_uri, session_id=session_id, uploaded_file=uploaded_file
+        )
         for uploaded_file in uploaded_files
     ]
-    ids = [hashlib.md5(uri.encode("utf-8")).hexdigest() for uri in uris]
+    ids = [
+        _generate_uploaded_file_id(session_id=session_id, uploaded_file=uploaded_file)
+        for uploaded_file in uploaded_files
+    ]
     for i, uploaded_file in enumerate(uploaded_files):
         blob = storage.Blob.from_string(uris[i], storage_client)
         blob.upload_from_file(uploaded_file)
@@ -198,6 +203,39 @@ def upload_files(
         st.error(f"Failed to import documents: {result.error_samples}")
 
 
+def _generate_uploaded_file_id(session_id: str, uploaded_file: UploadedFile):
+    return hashlib.md5(
+        "{}:{}".format(session_id.encode("utf-8"), uploaded_file.name)
+    ).hexdigest()
+
+
+def _generate_uploaded_file_uri(
+    bucket_uri: str, session_id: str, uploaded_file: UploadedFile
+):
+    return f"{bucket_uri}/{session_id}/{uploaded_file.name}"
+
+
+def _purge_documents(
+    data_store_id: str,
+    user_id: str,
+    session_id: str,
+    bucket_uri: str,
+    storage_client: storage.Client,
+    search_client: discoveryengine.DocumentServiceClient,
+):
+    request = discoveryengine.PurgeDocumentsRequest(
+        parent=data_store_id,
+        # FIX: filter is not yet supported, only wildcard is supported 🥲
+        # filter=f"user_id: {user_id} AND session_id: {session_id}",
+        filter="*",
+    )
+    search_client.purge_documents(request=request)
+    bucket = storage.Bucket.from_string(bucket_uri, storage_client)
+    blobs = storage_client.list_blobs(bucket, prefix=f"{session_id}/")
+    for blob in blobs:
+        blob.delete(if_generation_match=blob.generation)
+
+
 def run(
     project: str,
     location: str,
@@ -214,7 +252,7 @@ def run(
     uploaded_files = st.sidebar.file_uploader("Documents", accept_multiple_files=True)
 
     if len(uploaded_files) != 0:
-        upload_files(
+        _import_documents(
             data_store_id=search_client.branch_path(
                 project=project,
                 location=search_location,
@@ -238,8 +276,21 @@ def run(
         user_id=user_id,
         session_id=session_id,
     )
-    if len(msgs.messages) == 0 or st.sidebar.button("Clear message history"):
+    if st.sidebar.button("Clear message history"):
         msgs.clear()
+        _purge_documents(
+            data_store_id=search_client.branch_path(
+                project=project,
+                location=search_location,
+                data_store=search_data_store,
+                branch="default_branch",
+            ),
+            user_id=user_id,
+            session_id=session_id,
+            bucket_uri=bucket_uri,
+            storage_client=storage_client,
+            search_client=search_client,
+        )
 
     avatars = {"human": "user", "ai": "assistant"}
     for msg in msgs.messages:
